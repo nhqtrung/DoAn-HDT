@@ -5,10 +5,10 @@ template <class T>
 CustomArray<T>::CustomArray(int m_N) {
 	this->N = m_N;
 	this->arr = new T[3 * this->N];
-	this->p_LowerBound = &arr[0];
-	this->p_Begin = &arr[this->N];
-	this->p_End = &arr[2 * this->N];
-	this->p_UpperBound = &arr[3 * this->N - 1];
+	this->p_LowerBound = arr;
+	this->p_Begin = arr + N;
+	this->p_End = arr + (2 * N);
+	this->p_UpperBound = arr + (3 * N - 1);
 }
 
 template <class T>
@@ -58,11 +58,14 @@ template <class T>
 CustomArray<T>::CustomArray(const CustomArray<T> &t) {
 	N = t.N;
 	arr = new T[3 * this->N];
+	this->p_LowerBound = arr;
+	this->p_Begin = arr + N;
+	this->p_End = arr + (2 * N);
+	this->p_UpperBound = arr + (3 * N - 1);
 	for (int i = 0; i < this->N; i++)
 	{
 		*(arr + N + i) = *(t.arr + N + i);
 	}
-
 }
 
 /* Operator = use deep copy */
@@ -70,6 +73,10 @@ template <class T>
 CustomArray<T>& CustomArray<T>::operator=(CustomArray<T> &t) {
 	this->N = t.N;
 	this->arr = new T[3 * this->N];
+	this->p_LowerBound = arr;
+	this->p_Begin = arr + N;
+	this->p_End = arr + (2 * N);
+	this->p_UpperBound = arr + (3 * N - 1);
 	for (int i = 0; i < this->N; i++)
 	{
 		*(arr + N + i) = *(t.arr + N + i);
